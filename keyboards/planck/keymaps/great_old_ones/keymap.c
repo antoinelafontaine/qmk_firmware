@@ -50,7 +50,8 @@ enum custom_keycodes {
   ECIRC,
   AGRAVE,
   ACIRC,
-  CEDILLA
+  CEDILLA,
+  UGRAVE
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -84,7 +85,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_UNICODE] = LAYOUT_planck_grid(
         _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,
-        _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    CEDILLA,    _______,
+        _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    UGRAVE,     _______,
         _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    ACUTE,      EGRAVE,     AGRAVE,     _______,
         _______,    _______,    _______,    _______,    _______,    _______,    XXXXXXX,    _______,    _______,    _______,    _______,    _______
     )
@@ -105,6 +106,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case AGRAVE:
             if (record->event.pressed) {
                 SEND_STRING(SS_LALT("`")"a");
+            }
+            break;
+        case UGRAVE:
+            if (record->event.pressed) {
+                SEND_STRING(SS_LALT("`")"u");
             }
             break;
         case CEDILLA:
