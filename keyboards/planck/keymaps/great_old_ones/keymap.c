@@ -51,7 +51,8 @@ enum custom_keycodes {
   AGRAVE,
   ACIRC,
   CEDILLA,
-  UGRAVE
+  UGRAVE,
+  EMDASH
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -85,9 +86,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_UNICODE] = LAYOUT_planck_grid(
         _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,
-        _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    UGRAVE,     _______,
-        _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    ACUTE,      EGRAVE,     AGRAVE,     _______,
-        _______,    _______,    _______,    _______,    _______,    _______,    XXXXXXX,    _______,    _______,    _______,    _______,    _______
+        _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    EMDASH,     AGRAVE,     ACIRC,      CEDILLA,
+        _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    ACUTE,      EGRAVE,     ECIRC,      _______,
+        _______,    _______,    _______,    _______,    _______,    _______,    XXXXXXX,    _______,    UGRAVE,     _______,    _______,    _______
     )
 };
 
@@ -113,9 +114,24 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 SEND_STRING(SS_LALT("`")"u");
             }
             break;
+        case ECIRC:
+            if (record->event.pressed) {
+                SEND_STRING(SS_LALT("i")"e");
+            }
+            break;
+        case ACIRC:
+            if (record->event.pressed) {
+                SEND_STRING(SS_LALT("i")"a");
+            }
+            break;
         case CEDILLA:
             if (record->event.pressed) {
                 SEND_STRING(SS_LALT("c"));
+            }
+            break;
+        case EMDASH:
+            if (record->event.pressed) {
+                SEND_STRING(SS_LALT(SS_LSFT("-")));
             }
             break;
     }
